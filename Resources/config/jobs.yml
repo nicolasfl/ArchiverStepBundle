@@ -1,0 +1,16 @@
+parameters:
+    extensions_archiver_step.connector_name.csv: Extensions Archiver CSV Connector
+    extensions_archiver_step.job_name.csv_product_import_archiver: 'csv_product_import_archiver'
+
+services:
+    extensions.archiver_step.job.archiver_import_job:
+        class: '%pim_connector.job.simple_job.class%'
+        arguments:
+            - '%extensions_archiver_step.job_name.csv_product_import_archiver%'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            -
+                - '@pim_connector.step.csv_product.import'
+                - '@extensions_archiver_step.step.archiver'
+        tags:
+            - { name: akeneo_batch.job, connector: '%extensions_archiver_step.connector_name.csv%', type: '%pim_connector.job.import_type%' }

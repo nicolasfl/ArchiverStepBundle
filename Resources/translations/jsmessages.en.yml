@@ -1,0 +1,15 @@
+batch_jobs:
+    csv_product_import_archiver:
+        label: CSV Product Import with Archiver Step
+    default_steps:
+        archiver: Archiving
+        import: Import
+
+csv_product_import_archiver:
+    form:
+        job_instance:
+            tab:
+                properties:
+                    dir_archive:
+                        title: Archives directory path
+                        help: For instance ./var/archives/

@@ -1,0 +1,13 @@
+parameters:
+    extensions_archiver_step.job.job_parameters.csv_product_import_archiver.class: Extensions\Bundle\ArchiverStepBundle\Job\JobParameters\ProductCsvImportArchiver
+
+services:
+    extensions_archiver_step.job.job_parameters.csv_product_import_archiver:
+        class: '%extensions_archiver_step.job.job_parameters.csv_product_import_archiver.class%'
+        arguments:
+            - '@pim_connector.job.job_parameters.default_values_provider.product_csv_import'
+            - '@pim_connector.job.job_parameters.constraint_collection_provider.product_csv_import'
+            - ['%extensions_archiver_step.job_name.csv_product_import_archiver%']
+        tags:
+            - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
+            - { name: akeneo_batch.job.job_parameters.default_values_provider }

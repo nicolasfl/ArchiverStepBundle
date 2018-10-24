@@ -1,0 +1,32 @@
+{
+    "name": "nicolas-souffleur/archiver-step-bundle",
+    "type": "symfony-bundle",
+    "description": "Add this step to a connector and manage by yourself where to stock the imported files",
+    "homepage": "http://www.nicolas-souffleur.com",
+    "keywords": ["extensions", "akeneo" , "pim", "ecommerce", "workflow", "archiver", "step", "magento"],
+    "version": "1.0.0",
+    "require": {
+        "akeneo/pim-community-dev": "3.*"
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/akeneo/pim-community-dev.git",
+        "branch": "master"
+      }
+    ],
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Nicolas Souffleur",
+            "email": "contact@nicolas-souffleur.com",
+            "homepage": "http://www.nicolas-souffleur.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Extensions\\Bundle\\ArchiverStepBundle\\": ""
+      }
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,8 @@
+services:
+    extensions_archiver_step.provider.form.job_instance:
+        class: '%pim_enrich.provider.form.job_instance.class%'
+        arguments:
+            -
+                csv_product_import_archiver: pim-job-instance-csv-product-import-archiver
+        tags:
+            - { name: pim_enrich.provider.form }

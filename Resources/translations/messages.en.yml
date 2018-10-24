@@ -1,0 +1,13 @@
+batch_jobs:
+    csv_product_import_archiver:
+        label: Product Import Archiver
+        validation.label:  File encoding validation
+
+csv_product_import_archiver:
+    form:
+        job_instance:
+            tab:
+                properties:
+                    dir_archive:
+                        title: Archive directory
+                        help: Path to the archive directory
