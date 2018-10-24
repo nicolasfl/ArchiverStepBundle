@@ -1,3 +1,5 @@
+![ArchiverStepBundle](doc/ArchiverStep.png)
+
 ArchiverStepBundle
 ==========================
 
