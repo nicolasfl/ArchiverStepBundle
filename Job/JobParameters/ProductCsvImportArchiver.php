@@ -7,6 +7,8 @@ use Akeneo\Tool\Component\Batch\Job\JobParameters\ConstraintCollectionProviderIn
 use Akeneo\Tool\Component\Batch\Job\JobParameters\DefaultValuesProviderInterface;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
+
 
 /**
  * Class ProductCsvImportArchiver
@@ -42,8 +44,9 @@ class ProductCsvImportArchiver implements ConstraintCollectionProviderInterface,
     public function getDefaultValues()
     {
         return array_merge($this->baseDefaultValuesProvider->getDefaultValues(), [
-                'dirArchive' => './var/archives/'
-            ]);
+            'archiverEnabled' => true,
+            'dirArchive'     => './var/archives/'
+        ]);
     }
 
     /**
@@ -52,7 +55,10 @@ class ProductCsvImportArchiver implements ConstraintCollectionProviderInterface,
     public function getConstraintCollection()
     {
         $baseConstraints  = $this->baseConstraintCollectionProvider->getConstraintCollection();
-        $constraintFields = array_merge($baseConstraints->fields, ['dirArchive' => new NotNull()]);
+        $constraintFields = array_merge($baseConstraints->fields, [
+            'archiverEnabled' => new Type('bool'),
+            'dirArchive'     => new NotNull()
+        ]);
 
         return new Collection(['fields' => $constraintFields]);
     }

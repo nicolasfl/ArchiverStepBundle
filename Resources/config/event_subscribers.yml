@@ -1,0 +1,7 @@
+services:
+    archiver.listener:
+        class: Extensions\Bundle\ArchiverStepBundle\EventListener\ArchiverListener
+        arguments:
+            - '@akeneo_batch.job_repository'
+        tags:
+            - { name: kernel.event_listener, event: akeneo_batch.after_job_execution, method: onAfterJobExecution }

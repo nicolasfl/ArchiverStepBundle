@@ -96,6 +96,17 @@ extensions:
             label: pim_import_export.form.job_instance.tab.properties.file_path.title
             tooltip: pim_import_export.form.job_instance.tab.properties.file_path.help
 
+    pim-job-instance-csv-product-import-archiver-edit-properties-archiver-enabled:
+        module: pim/job/common/edit/field/switch
+        parent: pim-job-instance-csv-product-import-archiver-edit-global
+        position: 125
+        targetZone: properties
+        config:
+            fieldCode: configuration.archiverEnabled
+            readOnly: false
+            label: archiver.form.job_instance.tab.properties.archiverEnabled.title
+            tooltip: archiver.form.job_instance.tab.properties.archiverEnabled.help
+
     pim-job-instance-csv-product-import-archiver-edit-properties-dir-archive:
         module: pim/job/common/edit/field/text
         parent: pim-job-instance-csv-product-import-archiver-edit-global
@@ -104,8 +115,8 @@ extensions:
         config:
             fieldCode: configuration.dirArchive
             readOnly: false
-            label: csv_product_import_archiver.form.job_instance.tab.properties.dir_archive.title
-            tooltip: csv_product_import_archiver.form.job_instance.tab.properties.dir_archive.help
+            label: archiver.form.job_instance.tab.properties.dir_archive.title
+            tooltip: archiver.form.job_instance.tab.properties.dir_archive.help
 
     pim-job-instance-csv-product-import-archiver-edit-properties-file-upload:
         module: pim/job/common/edit/field/switch

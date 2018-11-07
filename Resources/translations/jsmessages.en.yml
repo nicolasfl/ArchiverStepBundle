@@ -5,7 +5,7 @@ batch_jobs:
         archiver: Archiving
         import: Import
 
-csv_product_import_archiver:
+archiver:
     form:
         job_instance:
             tab:
@@ -13,3 +13,6 @@ csv_product_import_archiver:
                     dir_archive:
                         title: Archives directory path
                         help: For instance ./var/archives/
+                    archiverEnabled:
+                        title: Enable File Archiver
+                        help: Decide if you want to stock the file in a specific directory

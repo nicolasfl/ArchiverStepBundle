@@ -11,13 +11,14 @@ You can also use it as a product import job.
 
 | ArchiverStepBundle     | Akeneo PIM Community Edition | Akeneo PIM Enterprise Edition |
 |:------------------------------:|:----------------------------:|:-----------------------------:|
-| v1.0.*                         | v3.*                         | v3.*                              |
+| v1.1.*                         | v3.*                         | v3
+.*                              |
 
 ## Installation
 
 Enter the following command line:
 ```console
-$php composer.phar require "nicolas-souffleur/archiver-step-bundle":"1.0.*"
+$php composer.phar require "nicolas-souffleur/archiver-step-bundle":"1.1.*"
 ```
 
 Then enable the bundle in the ```app/AppKernel.php``` file in the registerProjectBundles() method:
@@ -38,20 +39,39 @@ Two ways are possible :
 * In the field "Archives directory path" configure the directory where you want to archive your files.
 
 ### Plug it to a connector
-* In the jobs.yml file of your own connector, add the Archiver Step like as follow : 
+* In the edit form_extension file of your own connector, add the 
+following lines at the end of the file : 
 ```yml
-extensions.archiver_step.job.archiver_import_job:
-        class: '%pim_connector.job.simple_job.class%'
-        arguments:
-            - '%extensions_archiver_step.job_name.csv_product_import_archiver%'
-            - '@event_dispatcher'
-            - '@akeneo_batch.job_repository'
-            -
-                - '@pim_connector.step.csv_product.import'
-                ## Add the following line
-                - '@extensions_archiver_step.step.archiver'
+    pim-job-instance-csv-product-import-archiver-edit-properties-archiver-enabled:
+        module: pim/job/common/edit/field/switch
+        parent: pim-job-instance-csv-product-import-archiver-edit-global
+        position: 125
+        targetZone: properties
+        config:
+            fieldCode: configuration.archiverEnabled
+            readOnly: false
+            label: archiver.form.job_instance.tab.properties.archiverEnabled.title
+            tooltip: archiver.form.job_instance.tab.properties.archiverEnabled.help
+
+    pim-job-instance-csv-product-import-archiver-edit-properties-dir-archive:
+        module: pim/job/common/edit/field/text
+        parent: pim-job-instance-csv-product-import-archiver-edit-global
+        position: 130
+        targetZone: properties
+        config:
+            fieldCode: configuration.dirArchive
+            readOnly: false
+            label: archiver.form.job_instance.tab.properties.dir_archive.title
+            tooltip: archiver.form.job_instance.tab.properties.dir_archive.help
 ```
-* In your JobParameters file, add those two functions to add the dirArchive field to your configuration : 
+
+* In your JobParameters file, add the two following declarations : 
+```php
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
+```
+
+Then add those two functions to add the two new fields to your configuration : 
 ```php
 /**
      * {@inheritdoc}
@@ -59,7 +79,8 @@ extensions.archiver_step.job.archiver_import_job:
     public function getDefaultValues()
     {
         return array_merge($this->baseDefaultValuesProvider->getDefaultValues(), [
-                'dirArchive' => './var/archives/'
+                'archiverEnabled' => true,
+                'dirArchive'     => './var/archives/'
             ]);
     }
 
@@ -69,16 +90,17 @@ extensions.archiver_step.job.archiver_import_job:
     public function getConstraintCollection()
     {
         $baseConstraints  = $this->baseConstraintCollectionProvider->getConstraintCollection();
-        $constraintFields = array_merge($baseConstraints->fields, ['dirArchive' => new NotNull()]);
+        $constraintFields = array_merge($baseConstraints->fields, [
+            'archiverEnabled' => new Type('bool'),
+            'dirArchive'     => new NotNull()
+        ]);
 
         return new Collection(['fields' => $constraintFields]);
     }
 ```
 
 ## Roadmap
-* Add a configuration field to choose the name of the archive
-* Archive the files depending on the import status
-* Select field with available locales in the job instance configuration 
+* [DONE] Archive the files depending on the import status
 
 Don't hesitate to send me a message if you would like other features :)
 

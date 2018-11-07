@@ -11,6 +11,5 @@ services:
             - '@akeneo_batch.job_repository'
             -
                 - '@pim_connector.step.csv_product.import'
-                - '@extensions_archiver_step.step.archiver'
         tags:
             - { name: akeneo_batch.job, connector: '%extensions_archiver_step.connector_name.csv%', type: '%pim_connector.job.import_type%' }

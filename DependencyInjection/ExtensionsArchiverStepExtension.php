@@ -25,6 +25,6 @@ class ExtensionsArchiverStepExtension extends Extension
         $loader->load('jobs.yml');
         $loader->load('job_parameters.yml');
         $loader->load('providers.yml');
-        $loader->load('steps.yml');
+        $loader->load('event_subscribers.yml');
     }
 }

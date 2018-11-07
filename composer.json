@@ -4,7 +4,7 @@
     "description": "Add this step to a connector and manage by yourself where to stock the imported files",
     "homepage": "http://www.nicolas-souffleur.com",
     "keywords": ["extensions", "akeneo" , "pim", "ecommerce", "workflow", "archiver", "step", "magento"],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "require": {
         "akeneo/pim-community-dev": "3.*"
     },

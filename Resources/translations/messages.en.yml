@@ -3,11 +3,14 @@ batch_jobs:
         label: Product Import Archiver
         validation.label:  File encoding validation
 
-csv_product_import_archiver:
+archiver:
     form:
         job_instance:
             tab:
                 properties:
+                    archiverEnabled:
+                        title: Enable File Archiver
+                        help: Decide if you want to stock the file in a specific directory
                     dir_archive:
-                        title: Archive directory
+                        title: Archive directory (if archiving enabled)
                         help: Path to the archive directory
